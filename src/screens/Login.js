@@ -9,7 +9,7 @@ import firebase from 'firebase'
 import { connect } from "react-redux";
 import { Center } from "@builderx/utils";
 import { userActions } from "../_actions";
-
+import Expo from 'expo'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +26,12 @@ class Login extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
   }
   componentDidMount(){
     if(!firebase.apps.length){

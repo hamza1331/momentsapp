@@ -84,7 +84,6 @@ export default class App extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
-    console.warn("Fallback font is being used. Please check App.js file.");
   }
   render() {
     return this.state.fontLoaded ? (

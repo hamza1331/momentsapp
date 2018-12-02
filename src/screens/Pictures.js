@@ -1,87 +1,144 @@
-import React, { Component } from "react";
-import Header4 from "../symbols/header4";
-import { Center } from "@builderx/utils";
+import Expo from 'expo';
+import React from 'react';
 import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
+  Image,
+  Platform,
   ScrollView,
-  Image
-} from "react-native";
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  StatusBar,
+  Dimensions
+} from 'react-native';
 
-export default class Pictures extends Component {
+import Immutable from 'immutable';
+import ImageGallery, { openImageGallery } from '@expo/react-native-image-gallery';
+import {  Header, Left, Body, Right, Button,Title,Icon } from 'native-base';
+class ListItem extends React.Component {
+  _openInImageGallery = () => {
+    let { item } = this.props;
+
+    this._view.measure((rx, ry, w, h, x, y) => {
+      openImageGallery({
+        animationMeasurements: {w, h, x, y},
+        list,
+        item,
+      });
+    });
+  };
+
+  render() {
+    let { list, item } = this.props;
+
+    let { width, height } = item;
+
+    let targetWidth = Dimensions.get('screen').width*0.9;
+    let multiplier = targetWidth / width;
+    let targetHeight = multiplier * height;
+
+    return (
+      <TouchableWithoutFeedback onPress={this._openInImageGallery}>
+        <Image
+          ref={view => { this._view = view }}
+          source={{uri: item.imageUrl}}
+          style={{width: targetWidth, height: targetHeight, marginBottom: 20}} />
+      </TouchableWithoutFeedback>
+    );
+  }
+
+}
+
+class FakeContent extends React.Component {
   render() {
     return (
-      <View style={styles.root}>
-        <Header4 title="Pictures" navigation={this.props.navigation} style={styles.header4} />
-        <ScrollView style={styles.scrollArea} />
-        <Image
-          source={require("../assets/DSC100472064.jpg")}
-          style={styles.image}
-        />
-        <Image
-          source={require("../assets/dawn-3725927_1920.jpg")}
-          style={styles.image2}
-        />
-        <Image
-          source={require("../assets/dawn-3358468_1920.jpg")}
-          style={styles.image3}
-        />
-        <Image
-          source={require("../assets/pier-407252_1920.jpg")}
-          style={styles.image4}
-        />
+      <View style={{flex: 1, paddingBottom: Platform.OS === 'android' ? 10 : 0}}>
+        <Header translucent>
+        <Left>
+            <Button onPress={()=>this.props.navigation.goBack()} transparent>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>My Album</Title>
+          </Body>
+          <Right />
+        </Header>
+
+        <ScrollView style={{flex: 1}} contentContainerStyle={{alignItems: 'center', paddingTop: 20}}>
+          {list.map(item => <ListItem key={item.imageUrl} item={item} />)}
+        </ScrollView>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: "white",
-    flex: 1
-  },
-  header4: {
-    top: 0,
-    left: 0,
-    width: "100.83%",
-    height: "5.95%",
-    position: "absolute"
-  },
-  scrollArea: {
-    height: "93.78%",
-    width: "100%",
-    left: 3,
-    position: "absolute",
-    backgroundColor: "rgba(255,255,255,1)",
-    opacity: 1,
-    top: "5.95%"
-  },
-  image: {
-    height: 153,
-    width: 180,
-    position: "absolute",
-    left: "0%",
-    top: "5.95%"
-  },
-  image2: {
-    height: 151,
-    width: 180,
-    top: 46,
-    left: 181,
-    position: "absolute"
-  },
-  image3: {
-    height: 157,
-    width: 180,
-    position: "absolute",
-    left: "0%",
-    top: "28.08%"
-  },
-  image4: {
-    height: 155,
-    width: 181,
-    top: 209,
-    left: 180,
-    position: "absolute"
+
+export default class Pictures extends React.Component {
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <View style={styles.container}>
+          <FakeContent navigation = {this.props.navigation} />
+        </View>
+
+        <ImageGallery />
+        <StatusBar barStyle="default" />
+      </View>
+    );
   }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
 });
+
+const list = [
+  {
+    description: ':O hat etc',
+    imageUrl: 'https://images.freeimages.com/images/large-previews/e6b/yellow-beetle-1366999.jpg',
+    width: 480,
+    height: 480,
+  },
+  {
+    imageUrl: 'https://images.freeimages.com/images/large-previews/d1f/balloon-contest-1417733.jpg',
+    description: 'wood',
+    width: 640,
+    height: 640,
+  },
+  {
+    imageUrl: 'https://images.freeimages.com/images/large-previews/4dc/street-1366583.jpg',
+    description: 'making beer etc',
+    width: 640,
+    height: 640,
+  },
+  {
+    imageUrl: 'https://images.freeimages.com/images/large-previews/ed3/a-stormy-paradise-1-1563744.jpg',
+    description: 'making beer etc',
+    width: 640,
+    height: 640,
+  },
+  {
+    imageUrl: 'https://images.freeimages.com/images/large-previews/371/swiss-mountains-1362975.jpg',
+    description: 'making beer etc',
+    width: 640,
+    height: 640,
+  },
+  {
+    imageUrl: 'https://images.freeimages.com/images/large-previews/859/burning-trees-1391193.jpg',
+    description: 'making beer etc',
+    width: 640,
+    height: 640,
+  },
+];

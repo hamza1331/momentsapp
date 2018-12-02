@@ -1,50 +1,49 @@
-import React, { Component } from "react";
-import Header4 from "../symbols/header4";
-import { MapView } from "expo";
-import { View, StyleSheet } from "react-native";
+// import React, { Component } from "react";
+// import Header4 from "../symbols/header4";
+// import { MapView } from "expo";
+// import { View, StyleSheet } from "react-native";
 
-export default class Map extends Component {
-  render() {
-    return (
-      <View style={styles.root}>
-        <Header4 title="Map View" navigation={this.props.navigation} style={styles.header4} />
-        <MapView
-          style={styles.mapView}
-          provider={MapView.PROVIDER_GOOGLE}
-          initialRegion={{
-            latitude: 37.79,
-            longitude: -122.43,
-            latitudeDelta: 0.09,
-            longitudeDelta: 0.04
-          }}
-          customMapStyle={[]} /*Standard*/
-        />
-      </View>
-    );
-  }
-}
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: "white",
-    flex: 1
-  },
-  header4: {
-    top: 0,
-    left: "0%",
-    width: "100.83%",
-    height: "5.95%",
-    position: "absolute"
-  },
-  mapView: {
-    height: "93.78%",
-    width: "99.7%",
-    top: 46,
-    left: 0,
-    position: "absolute",
-    backgroundColor: "rgb(230,230,230)"
-  }
-});
-/*
+// export default class Map extends Component {
+//   render() {
+//     return (
+//       <View style={styles.root}>
+//         <Header4 title="Map View" navigation={this.props.navigation} style={styles.header4} />
+//         <MapView
+//           style={styles.mapView}
+//           provider={MapView.PROVIDER_GOOGLE}
+//           initialRegion={{
+//             latitude: 37.79,
+//             longitude: -122.43,
+//             latitudeDelta: 0.09,
+//             longitudeDelta: 0.04
+//           }}
+//           customMapStyle={[]} /*Standard*/
+//         />
+//       </View>
+//     );
+//   }
+// }
+// const styles = StyleSheet.create({
+//   root: {
+//     backgroundColor: "white",
+//     flex: 1
+//   },
+//   header4: {
+//     top: 0,
+//     left: "0%",
+//     width: "100.83%",
+//     height: "5.95%",
+//     position: "absolute"
+//   },
+//   mapView: {
+//     height: "93.78%",
+//     width: "99.7%",
+//     top: 46,
+//     left: 0,
+//     position: "absolute",
+//     backgroundColor: "rgb(230,230,230)"
+//   }
+// });
 import React, { Component } from "react";
 import {
   AppRegistry,
@@ -57,7 +56,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-
+import {  Header, Left, Body, Right, Button,Title,Icon } from 'native-base';
 import MapView from "react-native-maps";
 
 const Images = [
@@ -80,7 +79,7 @@ export default class App extends Component {
           latitude: 45.524548,
           longitude: -122.6749817,
         },
-        title: "Best Place",
+        title: "Best Album",
         description: "This is the best place in Portland",
         image: Images[0],
       },
@@ -89,7 +88,7 @@ export default class App extends Component {
           latitude: 45.524698,
           longitude: -122.6655507,
         },
-        title: "Second Best Place",
+        title: "Second Album",
         description: "This is the second best place in Portland",
         image: Images[1],
       },
@@ -98,7 +97,7 @@ export default class App extends Component {
           latitude: 45.5230786,
           longitude: -122.6701034,
         },
-        title: "Third Best Place",
+        title: "Third Album",
         description: "This is the third best place in Portland",
         image: Images[2],
       },
@@ -107,7 +106,7 @@ export default class App extends Component {
           latitude: 45.521016,
           longitude: -122.6561917,
         },
-        title: "Fourth Best Place",
+        title: "Fourth Album",
         description: "This is the fourth best place in Portland",
         image: Images[3],
       },
@@ -174,6 +173,17 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
+       <Header translucent>
+        <Left>
+            <Button onPress={()=>this.props.navigation.goBack()} transparent>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Albums Map</Title>
+          </Body>
+          <Right />
+        </Header>
         <MapView
           ref={map => this.map = map}
           initialRegion={this.state.region}
@@ -306,4 +316,3 @@ const styles = StyleSheet.create({
     borderColor: "rgba(130,4,150, 0.5)",
   },
 });
-*/

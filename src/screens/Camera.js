@@ -85,6 +85,7 @@ import {
   Alert
 } from 'react-native';
 import { Constants, ImagePicker, Permissions,Location } from 'expo';
+import {  Header, Left, Body, Right, Button as Btn,Title,Icon } from 'native-base';
 import firebase from 'firebase'
 export default class Camera extends Component {
   constructor(props){
@@ -116,7 +117,7 @@ export default class Camera extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" />
-
+        
         <Text
           style={styles.exampleText}>
           Example: Upload ImagePicker result
