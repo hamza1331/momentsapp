@@ -4,21 +4,16 @@ import Username from "../symbols/Username";
 import Password from "../symbols/Password";
 import Buttonlogin from "../symbols/Buttonlogin";
 import ButtonSignUp from "../symbols/ButtonSignUp";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import firebase from 'firebase'
-import { connect } from "react-redux";
 import { Center } from "@builderx/utils";
-import { userActions } from "../_actions";
 import Expo from 'expo'
 class Login extends Component {
   constructor(props) {
     super(props);
-
-    // reset login status
-    // this.props.dispatch(userActions.logout());
     this.state = {
-      email: "best@moments.com",
-      password: "abc@123",
+      email: "",
+      password: "",
       submitted: false,
       usenameError: false,
       passwordError: false
@@ -84,10 +79,11 @@ class Login extends Component {
     let passwordError = this.state.passwordError ? "Invalid Password" : "";
     return (
       <View style={styles.root}>
-        <View style={styles.bg} />
-        <Center horizontal>
-          <Text style={styles.text}>MOMENTS</Text>
-        </Center>
+         <View style={styles.bg}>
+          <Text style={styles.text2} selectable={false}>
+            Right here Waiting 4U
+          </Text>
+        </View>
         <View style={styles.login}>
           <Username
             style={styles.username}
@@ -112,11 +108,8 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state
-});
 
-export default connect(mapStateToProps)(Login);
+export default Login;
 
 const styles = StyleSheet.create({
   root: {
@@ -220,5 +213,22 @@ const styles = StyleSheet.create({
     left: 46.5,
     right: 46.5,
     bottom: "10%"
+  },
+  text2: {
+    top: 93,
+    left: -1,
+    position: "absolute",
+    backgroundColor: "transparent",
+    transform: [
+      {
+        rotate: "-11.18deg"
+      }
+    ],
+    fontSize: 52,
+    fontFamily: "Chalkduster",
+    lineHeight: 54,
+    letterSpacing: 0,
+    textAlign: "center",
+    color: "rgba(255,255,255,1)"
   }
 });

@@ -1,91 +1,16 @@
-// import React, { Component } from 'react';
-// import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-// import { RNCamera } from 'react-native-camera';
-
-// const PendingView = () => (
-//   <View
-//     style={{
-//       flex: 1,
-//       backgroundColor: 'lightgreen',
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//     }}
-//   >
-//     <Text>Waiting</Text>
-//   </View>
-// );
-
-// export default class Camera extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <RNCamera
-//           style={styles.preview}
-//           type={RNCamera.Constants.Type.back}
-//           flashMode={RNCamera.Constants.FlashMode.on}
-//           permissionDialogTitle={'Permission to use camera'}
-//           permissionDialogMessage={'We need your permission to use your camera phone'}
-//         >
-//           {({ camera, status }) => {
-//             if (status !== 'READY') return <PendingView />;
-//             return (
-//               <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-//                 <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-//                   <Text style={{ fontSize: 14 }}> SNAP </Text>
-//                 </TouchableOpacity>
-//               </View>
-//             );
-//           }}
-//         </RNCamera>
-//       </View>
-//     );
-//   }
-
-//   takePicture = async function(camera) {
-//     const options = { quality: 0.5, base64: true };
-//     const data = await camera.takePictureAsync(options);
-//     //  eslint-disable-next-line
-//     console.log(data.uri);
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     backgroundColor: 'black',
-//   },
-//   preview: {
-//     flex: 1,
-//     justifyContent: 'flex-end',
-//     alignItems: 'center',
-//   },
-//   capture: {
-//     flex: 0,
-//     backgroundColor: '#fff',
-//     borderRadius: 5,
-//     padding: 15,
-//     paddingHorizontal: 20,
-//     alignSelf: 'center',
-//     margin: 20,
-//   },
-// });
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Button,
   Clipboard,
   Image,
   Share,
-  StatusBar,
+  Dimensions,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
-  Alert
+  View
 } from 'react-native';
-import { Constants, ImagePicker, Permissions,Location } from 'expo';
-import {  Header, Left, Body, Right, Button as Btn,Title,Icon } from 'native-base';
+import { ImagePicker, Permissions,Location } from 'expo';
+import {  Header, Left, Body, Text as TxT, Button as Btn,Title,Icon,Content,Container } from 'native-base';
 import firebase from 'firebase'
 export default class Camera extends Component {
   constructor(props){
@@ -115,24 +40,32 @@ export default class Camera extends Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle="default" />
-        
-        <Text
-          style={styles.exampleText}>
-          Example: Upload ImagePicker result
-        </Text>
-
-        <Button
-          onPress={this._pickImage}
-          title="Pick an image from camera roll"
-        />
-
-        <Button onPress={this._takePhoto} title="Take a photo" />
+      <Container>
+        <Header>
+          <Left>
+            <Btn onPress={()=>this.props.navigation.goBack()} transparent>
+              <Icon name='arrow-back' />
+            </Btn>
+          </Left>
+          <Body>
+            <Title>Add Photo</Title>
+          </Body>
+          
+        </Header>
+        <Content>
+          <View style={{flex:1,justifyContent:'center',height:Dimensions.get('screen').height*0.9,alignSelf:'center'}}>
+       <Btn onPress={this._pickImage} rounded info>
+        <TxT>Pick an image from camera roll</TxT>
+       </Btn>
+       <Btn style={{marginTop:Dimensions.get('screen').height*0.17,marginLeft:Dimensions.get('screen').width*0.2}} onPress={this._takePhoto} rounded primary>
+        <TxT>Take a Photo</TxT>
+       </Btn>
 
         {this._maybeRenderImage()}
         {this._maybeRenderUploadingOverlay()}
-      </View>
+          </View>
+        </Content>
+      </Container>
     );
   }
 
@@ -163,7 +96,6 @@ export default class Camera extends Component {
           style={styles.maybeRenderImageContainer}>
           <Image source={{ uri: image }} style={styles.maybeRenderImage} />
         </View>
-
         <Text
           onPress={this._copyToClipboard}
           onLongPress={this._share}
@@ -259,15 +191,6 @@ export default class Camera extends Component {
 
 async function uploadImageAsync(uri) {
   let apiUrl = 'https://file-upload-example-backend-dkhqoilqqn.now.sh/upload';
-
-  // Note:
-  // Uncomment this if you want to experiment with local server
-  //
-  // if (Constants.isDevice) {
-  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-  // } else {
-  //   apiUrl = `http://localhost:3000/upload`
-  // }
 
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];

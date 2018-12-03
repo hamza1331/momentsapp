@@ -12,7 +12,6 @@ import {
   Dimensions
 } from 'react-native';
 
-import Immutable from 'immutable';
 import ImageGallery, { openImageGallery } from '@expo/react-native-image-gallery';
 import {  Header, Left, Body, Right, Button,Title,Icon } from 'native-base';
 class ListItem extends React.Component {

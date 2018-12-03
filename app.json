@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "momentsapp",
-    "slug": "momentsapp",
+    "name": "Right here Waiting 4U",
+    "slug": "rightherewaiting4u",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icsn.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/spl.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.firstLearn.rightherewaiting4u"
+    },
+    "android": {
+      "package": "com.firstLearn.rightherewaiting4u"
     }
   }
 }

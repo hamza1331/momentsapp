@@ -1,15 +1,11 @@
 import React from "react";
 import { YellowBox, AsyncStorage } from "react-native";
-import { Provider } from "react-redux";
 
 import SignUp from "./src/screens/SignUp";
 import Login from "./src/screens/Login";
 
 import { Font } from "expo";
 
-import { store } from "./src/_helpers";
-
-import List9 from "./src/symbols/list9";
 import Main from "./src/screens/Main";
 import Camera from "./src/screens/Camera";
 import Gallery from "./src/screens/Gallery";
@@ -87,9 +83,7 @@ export default class App extends React.Component {
   }
   render() {
     return this.state.fontLoaded ? (
-      <Provider store={store}>
         <Root />
-      </Provider>
     ) : (
       <Expo.AppLoading />
     );

@@ -1,60 +1,12 @@
-// import React, { Component } from "react";
-// import Header4 from "../symbols/header4";
-// import { MapView } from "expo";
-// import { View, StyleSheet } from "react-native";
-
-// export default class Map extends Component {
-//   render() {
-//     return (
-//       <View style={styles.root}>
-//         <Header4 title="Map View" navigation={this.props.navigation} style={styles.header4} />
-//         <MapView
-//           style={styles.mapView}
-//           provider={MapView.PROVIDER_GOOGLE}
-//           initialRegion={{
-//             latitude: 37.79,
-//             longitude: -122.43,
-//             latitudeDelta: 0.09,
-//             longitudeDelta: 0.04
-//           }}
-//           customMapStyle={[]} /*Standard*/
-//         />
-//       </View>
-//     );
-//   }
-// }
-// const styles = StyleSheet.create({
-//   root: {
-//     backgroundColor: "white",
-//     flex: 1
-//   },
-//   header4: {
-//     top: 0,
-//     left: "0%",
-//     width: "100.83%",
-//     height: "5.95%",
-//     position: "absolute"
-//   },
-//   mapView: {
-//     height: "93.78%",
-//     width: "99.7%",
-//     top: 46,
-//     left: 0,
-//     position: "absolute",
-//     backgroundColor: "rgb(230,230,230)"
-//   }
-// });
 import React, { Component } from "react";
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   ScrollView,
   Animated,
   Image,
-  Dimensions,
-  TouchableOpacity,
+  Dimensions
 } from "react-native";
 import {  Header, Left, Body, Right, Button,Title,Icon } from 'native-base';
 import MapView from "react-native-maps";
@@ -71,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
-export default class App extends Component {
+export default class MapScreen extends Component {
   state = {
     markers: [
       {

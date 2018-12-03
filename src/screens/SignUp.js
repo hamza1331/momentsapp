@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { userActions } from "../_actions";
-
 import SignUpButton from "../symbols/Signin";
 import UntitledSymbol from "../symbols/UntitledSymbol";
 import Icon from "@builderx/icons";
@@ -140,10 +137,7 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state
-});
-export default connect(mapStateToProps)(SignUp);
+export default SignUp
 
 const styles = StyleSheet.create({
   root: {
